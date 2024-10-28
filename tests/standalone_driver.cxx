@@ -167,6 +167,8 @@ int main(int argc, char** argv) {
     OPT_KEYWORD("MCSCF.CI_MAX_SUB", mcscf_settings.ci_max_subspace, size_t);
     OPT_KEYWORD("MCSCF.CI_MATEL_TOL", mcscf_settings.ci_matel_tol, double);
 
+    OPT_KEYWORD("MCSCF.CI_NSTATES", mcscf_settings.ci_nstates, size_t);
+
     // ASCI Settings
     macis::ASCISettings asci_settings;
     std::string asci_wfn_fname, asci_wfn_out_fname;

@@ -104,7 +104,7 @@ TEST_CASE("Single Double Build") {
     double E0 = macis::selected_ci_diag(
         dets.begin(), dets.end(), ham_gen, mcscf_settings.ci_matel_tol,
         mcscf_settings.ci_max_subspace, mcscf_settings.ci_res_tol, C_local,
-        MACIS_MPI_CODE(MPI_COMM_WORLD, ) true);
+        MACIS_MPI_CODE(MPI_COMM_WORLD, ) true, mcscf_settings.ci_nstates);
     E0 += E_inactive + E_core;
     // Compute RDMs
     ham_gen.form_rdms(

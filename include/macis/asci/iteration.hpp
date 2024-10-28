@@ -34,7 +34,7 @@ auto asci_iter(ASCISettings asci_settings, MCSCFSettings mcscf_settings,
   auto E = selected_ci_diag<N, index_t>(
       wfn.begin(), wfn.end(), ham_gen, mcscf_settings.ci_matel_tol,
       mcscf_settings.ci_max_subspace, mcscf_settings.ci_res_tol,
-      X_local MACIS_MPI_CODE(, comm));
+      X_local MACIS_MPI_CODE(, comm), false, mcscf_settings.ci_nstates);
 
 #ifdef MACIS_ENABLE_MPI
   auto world_size = comm_size(comm);
