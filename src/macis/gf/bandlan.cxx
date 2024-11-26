@@ -325,14 +325,32 @@ void BandResolvent(
       ofile.close();
     }
     std::cout << "DONE! COMPUTING RESOLVENT ...";
+    if( ispart )
+    {
 #pragma omp parallel for
-    for(int iw = 0; iw < ws.size(); iw++) {
-      for(int k = 0; k < nvecs; k++) {
-        for(int l = 0; l < nvecs; l++) {
-          for(int i_lan = 0; i_lan < nLanIts; i_lan++) {
-            res[iw][k * nvecs + l] += S[i_lan * nvecs + k] * 1. /
-                                      (ws[iw] + eigvals[i_lan]) *
-                                      S[i_lan * nvecs + l];
+      for(int iw = 0; iw < ws.size(); iw++) {
+        for(int k = 0; k < nvecs; k++) {
+          for(int l = 0; l < nvecs; l++) {
+            for(int i_lan = 0; i_lan < nLanIts; i_lan++) {
+              res[iw][k * nvecs + l] += S[i_lan * nvecs + k] * 1. /
+                                        (ws[iw] + eigvals[i_lan]) *
+                                        S[i_lan * nvecs + l];
+            }
+          }
+        }
+      }
+    }
+    else 
+    {
+#pragma omp parallel for
+      for(int iw = 0; iw < ws.size(); iw++) {
+        for(int k = 0; k < nvecs; k++) {
+          for(int l = 0; l < nvecs; l++) {
+            for(int i_lan = 0; i_lan < nLanIts; i_lan++) {
+              res[iw][l * nvecs + k] += S[i_lan * nvecs + k] * 1. /
+                                        (ws[iw] + eigvals[i_lan]) *
+                                        S[i_lan * nvecs + l];
+            }
           }
         }
       }
