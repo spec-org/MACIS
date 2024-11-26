@@ -325,8 +325,7 @@ void BandResolvent(
       ofile.close();
     }
     std::cout << "DONE! COMPUTING RESOLVENT ...";
-    if( ispart )
-    {
+    if(ispart) {
 #pragma omp parallel for
       for(int iw = 0; iw < ws.size(); iw++) {
         for(int k = 0; k < nvecs; k++) {
@@ -339,9 +338,7 @@ void BandResolvent(
           }
         }
       }
-    }
-    else 
-    {
+    } else {
 #pragma omp parallel for
       for(int iw = 0; iw < ws.size(); iw++) {
         for(int k = 0; k < nvecs; k++) {

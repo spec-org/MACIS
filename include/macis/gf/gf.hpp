@@ -638,7 +638,7 @@ void RunGFCalc(std::vector<std::vector<std::complex<double>>> &GF,
       for(int iw = 0; iw < ws.size(); iw++) GF[iw][i * nvecs + i] = tGF[iw];
       for(int j = i + 1; j < nvecs; j++) {
         // OFF DIAGONAL ELEMENTS
-	// NOTE: WORKS ONLY FOR REAL-VALUED WAVE FUNCTIONS.
+        // NOTE: WORKS ONLY FOR REAL-VALUED WAVE FUNCTIONS.
         std::cout << "DOING ELEMENT (" << i << ", " << j << ")" << std::endl;
         for(size_t iii = 0; iii < nterms; iii++)
           twfn(iii) = wfns[i * nterms + iii] + wfns[j * nterms + iii];
