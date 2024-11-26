@@ -469,16 +469,32 @@ namespace cmz
 
 	}
         std::cout << "DONE! COMPUTING RESOLVENT ...";
-        #pragma omp parallel for
-        for(int iw = 0; iw < ws.size(); iw++){
-          for(int k = 0; k < n; k++){
-            for(int l = 0; l < n; l++){
-              for(int i_lan = 0; i_lan < nLanIts; i_lan++){
-                res[iw][k][l] += S[i_lan][k] * 1. / (ws[iw] + eigvals[i_lan]) * S[i_lan][l];
+	if( ispart )
+	{
+          #pragma omp parallel for
+          for(int iw = 0; iw < ws.size(); iw++){
+            for(int k = 0; k < n; k++){
+              for(int l = 0; l < n; l++){
+                for(int i_lan = 0; i_lan < nLanIts; i_lan++){
+                  res[iw][k][l] += S[i_lan][k] * 1. / (ws[iw] + eigvals[i_lan]) * S[i_lan][l];
+                }
               }
             }
           }
-        }
+	}
+	else
+	{
+          #pragma omp parallel for
+          for(int iw = 0; iw < ws.size(); iw++){
+            for(int k = 0; k < n; k++){
+              for(int l = 0; l < n; l++){
+                for(int i_lan = 0; i_lan < nLanIts; i_lan++){
+                  res[iw][l][k] += S[i_lan][k] * 1. / (ws[iw] + eigvals[i_lan]) * S[i_lan][l];
+                }
+              }
+            }
+          }
+	}
       }
       std::cout << "DONE!" << std::endl; 
     }

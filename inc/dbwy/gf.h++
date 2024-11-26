@@ -550,6 +550,7 @@ namespace cmz
            for(int j = i+1; j < wfns.size(); j++)
            {
              //OFF DIAGONAL ELEMENTS
+	     // NOTE: THIS ONLY WORKS FOR REAL WAVE FUNCTIONS!
              std::cout << "DOING ELEMENT (" << i << ", " << j << ")" << std::endl;
              for(size_t iii = 0; iii < nterms; iii++)
                twfn(iii) = wfns[i][iii] + wfns[j][iii];
